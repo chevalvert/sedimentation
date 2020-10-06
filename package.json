@@ -78,8 +78,10 @@
   },
   "dependencies": {
     "@internet/raf": "^0.2.1",
+    "fast-random": "^2.0.4",
     "missing-math": "^3.2.0",
     "tiny-throttle": "^1.0.1",
+    "webmidi": "^2.5.1",
     "zdog": "^1.1.2"
   },
   "private": false,
