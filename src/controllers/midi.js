@@ -18,7 +18,7 @@ function setup () {
     const cc = e.controller.number
     if (derivations[cc]) {
       const { signal, update } = derivations[cc]
-      signal.set(update(normalize(e.value, 0, 127)))
+      signal.set(update(normalize(e.value, 0, 127), signal.current))
     }
   })
 }

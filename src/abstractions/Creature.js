@@ -1,7 +1,6 @@
 import Store from 'store/store'
 import { Anchor, Shape } from 'zdog'
 
-import Limb from 'abstractions/Limb'
 import Bone from 'abstractions/Limbs/Bone'
 import Eye from 'abstractions/Limbs/Eye'
 import Finn from 'abstractions/Limbs/Finn'
@@ -17,7 +16,8 @@ export default class Creature {
     this.seed = Prng.seed = Store.seed.get()
     this.anchor = new Anchor({ addTo: sceneAnchor })
     this.anchors = this.createAnchors()
-    this.colors = shuffle([...Store.creature.colors.current]).splice(0, Store.creature.colorsLength.get())
+    this.colors = shuffle([...Store.creature.colors.current], Prng.random)
+      .splice(0, Store.creature.colorsLength.get())
     this.body = new Shape({
       addTo: this.anchor,
       color: 'rgba(255, 255, 255, 0.1)',
@@ -36,7 +36,13 @@ export default class Creature {
     for (let index = 0; index < length; index++) {
       const anchor = new Anchor({ addTo: this.anchor })
       anchor.positions = { CUBE: CUBE[index], PLANE: PLANE[index] }
-      anchor.dot = new Shape({ addTo: anchor, color: 'white' })
+      anchor.dot = new Shape({
+        addTo: anchor,
+        color: 'white',
+        translate: { z: -0.1 },
+        path: [{ x: 0.5, y: 0.5 }, { x: -0.5, y: 0.5 }, { x: -0.5, y: -0.5 }, { x: 0.5, y: -0.5 }],
+        scale: 0
+      })
 
       anchors.push(anchor)
     }
@@ -110,23 +116,27 @@ export default class Creature {
   update ({ ellapsedTime, frameCount }) {
     const [width, height] = Store.scene.dimensions.get()
     const density = Store.creature.density.get()
+    const planeLerp = Store.creature.planeLerp.get()
     this.anchor.scale = {
       x: density * Store.creature.scaleX.get(),
       y: density * Store.creature.scaleY.get(),
       z: density
     }
 
-    const planeLerp = Store.creature.planeLerp.get()
     this.anchors.forEach(anchor => {
       anchor.translate = lerpPoint(anchor.positions.CUBE, anchor.positions.PLANE, planeLerp)
-      anchor.dot.visible = Store.creature.debug.get()
+      const opacity = planeLerp ** 4
+      anchor.dot.color = `rgba(255, 255, 255, ${opacity})`
+      anchor.dot.scale = Store.creature.buildLerp.get()
     })
 
-    const opacity = 0.2 + (1 + Math.sin(ellapsedTime / 500)) * 0.05
-    const bodyFade = planeLerp ** 2
-    const maxSize = Math.max(width, height)
-    this.body.color = `rgba(255, 255, 255, ${opacity * (1 - bodyFade)})`
-    this.body.stroke = density * 4 + ((maxSize / 4) * bodyFade)
+    { // Body
+      const opacity = 0.2 + (1 + Math.sin(ellapsedTime / 500)) * 0.05
+      const bodyFade = planeLerp ** 2
+      const maxSize = Math.max(width, height)
+      this.body.color = `rgba(255, 255, 255, ${opacity * (1 - bodyFade)})`
+      this.body.stroke = density * 4 + ((maxSize / 4) * bodyFade)
+    }
 
     this.limbs.forEach(limb => {
       limb.anchor.scale = !limb.flipped

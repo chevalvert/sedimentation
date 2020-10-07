@@ -21,13 +21,18 @@ export default class Limb {
   render () {}
   update () {}
 
+  get visible () { return this.anchor.visible }
+  set visible (v) {
+    Object.values(this.refs).forEach(ref => { ref.visible = v })
+  }
+
   copy (anchor, props = this.props) {
     const copy = Object.assign(Object.create(Object.getPrototypeOf(this)), this)
     copy.anchor = new Anchor({ addTo: anchor })
     copy.props = props
     copy.refs = {}
     Object.entries(this.refs).forEach(([key, ref]) => {
-      copy.refs[key] = ref.copy({ addTo: copy.anchor })
+      copy.refs[key] = ref.copy({ addTo: copy.anchor, ...props })
     })
 
     copy.clonedFrom = this

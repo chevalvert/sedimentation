@@ -34,7 +34,8 @@ const Store = {
     density: writable(20),
     scaleX: writable(1),
     scaleY: writable(1),
-    planeLerp: writable(0)
+    planeLerp: writable(1),
+    buildLerp: writable(0)
   },
 
   raf: {
