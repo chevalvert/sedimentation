@@ -16,12 +16,12 @@ window.onload = () => {
   Store.raf.isRunning.set(true)
 }
 
-Midi.derive(Store.seed, { cc: 18, update: v => Date.now() })
-Midi.derive(Store.creature.scaleX, { cc: 16 })
-Midi.derive(Store.creature.scaleY, { cc: 17 })
-Midi.derive(Store.creature.density, { cc: 0, update: v => 10 + v * 190 })
-Midi.derive(Store.creature.planeLerp, { cc: 1 })
-Midi.derive(Store.creature.buildLerp, { cc: 2 })
+Midi.register(Store.seed, { cc: 18, update: v => Date.now() })
+Midi.register(Store.creature.scaleX, { cc: 16 })
+Midi.register(Store.creature.scaleY, { cc: 17 })
+Midi.register(Store.creature.density, { cc: 0, update: v => 10 + v * 190 })
+Midi.register(Store.creature.planeLerp, { cc: 1 })
+Midi.register(Store.creature.buildLerp, { cc: 2 })
 
 Raf.add(() => {
   if (!window.ENV.production) {

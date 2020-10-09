@@ -34,7 +34,7 @@ WebMidi.enable(error => {
 })
 
 export default {
-  derive: (signal, { cc, update = v => v } = {}) => {
+  register: (signal, { cc, update = v => v } = {}) => {
     derivations[cc] = { signal, update }
   }
 }
