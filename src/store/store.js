@@ -31,10 +31,12 @@ const Store = {
       '#f9d921',
       '#cbd3ac'
     ]),
+    oscillationFreq: writable(0.001),
+    oscillationAmp: writable(10),
     density: writable(20),
     scaleX: writable(1),
     scaleY: writable(1),
-    planeLerp: writable(1),
+    planeLerp: writable(0),
     buildLerp: writable(0)
   },
 

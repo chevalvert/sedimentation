@@ -123,6 +123,8 @@ export default class Creature {
       z: density
     }
 
+    this.anchor.translate.y = (1 - planeLerp) * Math.sin(ellapsedTime * Store.creature.oscillationFreq.get()) * Store.creature.oscillationAmp.get()
+
     this.anchors.forEach(anchor => {
       anchor.translate = lerpPoint(anchor.positions.CUBE, anchor.positions.PLANE, planeLerp)
       const opacity = planeLerp ** 4
