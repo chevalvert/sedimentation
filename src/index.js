@@ -1,11 +1,12 @@
 import Store from 'store/store'
 import { debounce } from 'tiny-throttle'
 
-import Midi from 'controllers/midi'
-import Tweakpane from 'controllers/tweakpane'
 import Animation from 'controllers/animation'
+import Midi from 'controllers/midi'
+import PostProcessing from 'controllers/post-processing'
 import Raf from 'controllers/raf'
 import Scene from 'controllers/scene'
+import Tweakpane from 'controllers/tweakpane'
 
 window.onresize = debounce(() => {
   Store.scene.dimensions.set([window.innerWidth, window.innerHeight])
@@ -25,11 +26,14 @@ Midi.register(Store.creature.planeLerp, { cc: 1 })
 Midi.register(Store.creature.buildLerp, { cc: 2 })
 
 Tweakpane.register(Store.demo, 'démo')
+Tweakpane.register(Store.postprocessing.enabled, 'post-process')
 Tweakpane.register(Store.creature.scaleX, 'échelle x', { min: 0, max: 1 })
 Tweakpane.register(Store.creature.scaleY, 'échelle y', { min: 0, max: 1 })
 Tweakpane.register(Store.creature.density, 'densité', { min: 10, max: 200, step: 1 })
 Tweakpane.register(Store.creature.planeLerp, 'sédimentation', { min: 0, max: 1 })
 Tweakpane.register(Store.creature.buildLerp, 'construction', { min: 0, max: 1 })
+
+PostProcessing.register(Scene.canvas)
 
 Raf.add(() => {
   if (!window.ENV.production) {
@@ -44,4 +48,11 @@ Raf.add(() => {
 
   Animation.update()
   Scene.render()
+
+  if (!Store.postprocessing.enabled.get()) return
+
+  /* eslint-disable dot-notation */
+  PostProcessing.SHADERS.sobel.uniforms['resolution'].value.x = Math.sin(Date.now() / 1000) * 200
+  PostProcessing.SHADERS.sobel.uniforms['resolution'].value.y = Math.sin(Date.now() / 1000) * 200
+  PostProcessing.render()
 })

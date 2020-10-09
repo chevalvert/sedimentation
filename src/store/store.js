@@ -56,6 +56,10 @@ const Store = {
     dimensions: writable([0, 0])
   },
 
+  postprocessing: {
+    enabled: writable(true)
+  },
+
   midi: {
     debug: writable(false),
     ready: writable(false),
@@ -63,12 +67,12 @@ const Store = {
   },
 
   tweakpane: {
-    disabled: undefined // See below for derivation
+    enabled: undefined // See below for derivation
   }
 }
 
 Store.demo = derived(Store.midi.ready, v => !v)
-Store.tweakpane.disabled = derived(Store.midi.ready, v => v)
+Store.tweakpane.enabled = derived(Store.midi.ready, v => !v)
 
 window.Store = Store
 export default Store

@@ -4,7 +4,7 @@ import Tweakpane from 'tweakpane'
 const pane = new Tweakpane()
 const VALUE_CONTAINER = {}
 
-Store.tweakpane.disabled.subscribe(() => pane.dispose())
+Store.tweakpane.enabled.subscribe(v => !v && pane.dispose())
 
 export default {
   register: (signal, name, options) => {

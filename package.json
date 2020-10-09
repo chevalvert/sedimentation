@@ -80,6 +80,7 @@
     "@internet/raf": "^0.2.1",
     "fast-random": "^2.0.4",
     "missing-math": "^3.2.0",
+    "three": "^0.121.1",
     "tiny-throttle": "^1.0.1",
     "tweakpane": "^1.5.5",
     "webmidi": "^2.5.1",

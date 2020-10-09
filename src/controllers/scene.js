@@ -1,5 +1,5 @@
 import Store from 'store/store'
-import { Anchor, Dragger, Shape } from 'zdog'
+import { Anchor, Dragger } from 'zdog'
 
 const anchor = new Anchor()
 const canvas = document.querySelector('canvas#Scene')
@@ -34,7 +34,6 @@ add(Dragger, {
     }), true)
   }
 })
-
 
 export default {
   get anchor () { return anchor },

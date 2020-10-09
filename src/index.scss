@@ -8,7 +8,16 @@ $white: #FFFFFF;
 @include html-no-scroll;
 
 canvas {
+  position: absolute;
+}
+
+canvas#Scene {
   background: #0a00a1;
+}
+
+canvas#PostProcessing {
+  pointer-events: none;
+  opacity: 1;
 }
 
 .tp-lblv_l {
