@@ -20,6 +20,19 @@ canvas#PostProcessing {
   opacity: 1;
 }
 
-.tp-lblv_l {
-  white-space: nowrap;
+// Tweakpane hacking
+.tp {
+  &-dfwv {
+    @include easing(300ms, opacity);
+  }
+
+  body:not(:hover) &-dfwv {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  &-lblv_l {
+    white-space: nowrap;
+  }
 }
+

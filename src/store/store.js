@@ -71,18 +71,14 @@ const Store = {
   },
 
   sound: {
-    enabled: writable(true),
     url: readable('scuba.mp3'),
-    isPlaying: writable(false),
+    isPlaying: writable(false)
   },
 
-  tweakpane: {
-    enabled: undefined // See below for derivation
-  }
+  tweakpane: {}
 }
 
 Store.demo = derived(Store.midi.ready, v => !v)
-Store.tweakpane.enabled = derived(Store.midi.ready, v => !v)
 
 window.Store = Store
 export default Store
