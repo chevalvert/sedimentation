@@ -1,7 +1,9 @@
-import { readable, writable } from 'utils/state'
+import { readable, writable, derived } from 'utils/state'
 
 const Store = {
   seed: writable(Date.now()),
+
+  demo: undefined, // See below for derivation
 
   creature: {
     debug: writable(false),
@@ -58,8 +60,15 @@ const Store = {
     debug: writable(false),
     ready: writable(false),
     input: readable('nanoKONTROL2 SLIDER/KNOB')
+  },
+
+  tweakpane: {
+    disabled: undefined // See below for derivation
   }
 }
+
+Store.demo = derived(Store.midi.ready, v => !v)
+Store.tweakpane.disabled = derived(Store.midi.ready, v => v)
 
 window.Store = Store
 export default Store
