@@ -1,5 +1,7 @@
 import Store from 'store/store'
 import { Anchor, Shape } from 'zdog'
+import hexToRgb from 'hex-rgb'
+import { map } from 'missing-math'
 
 import Bone from 'abstractions/Limbs/Bone'
 import Eye from 'abstractions/Limbs/Eye'
@@ -116,25 +118,33 @@ export default class Creature {
   update ({ ellapsedTime, frameCount }) {
     const [width, height] = Store.scene.dimensions.get()
     const density = Store.creature.density.get()
-    const planeLerp = Store.lerp.plane.get()
     this.anchor.scale = {
       x: density * Store.creature.scaleX.get(),
       y: density * Store.creature.scaleY.get(),
       z: density
     }
 
-    this.anchor.translate.y = (1 - planeLerp) * Math.sin(ellapsedTime * Store.creature.oscillationFreq.get()) * Store.creature.oscillationAmp.get()
+    this.anchor.translate.y = (1 - Store.lerp.plane.current) * Math.sin(ellapsedTime * Store.creature.oscillationFreq.get()) * Store.creature.oscillationAmp.get()
 
     this.anchors.forEach(anchor => {
-      anchor.translate = lerpPoint(anchor.positions.CUBE, anchor.positions.PLANE, planeLerp)
-      const opacity = planeLerp ** 4
+      anchor.translate = lerpPoint(anchor.positions.CUBE, anchor.positions.PLANE, Store.lerp.plane.current)
+
+      const opacity = Store.lerp.plane.current ** 4
       anchor.dot.color = `rgba(255, 255, 255, ${opacity})`
+      anchor.dot.fill = false
+      const hasLimb = anchor.children[1]
+      if (hasLimb) {
+        const { red, green, blue } = hexToRgb(anchor.children[1].children[0].color)
+        anchor.dot.color = `rgba(${red}, ${green}, ${blue})`
+        anchor.dot.fill = true
+        anchor.dot.stroke = map(Store.lerp.build.current, 0, 1, 1, 0.25)
+      }
       anchor.dot.scale = Store.lerp.build.get()
     })
 
     { // Body
       const opacity = 0.2 + (1 + Math.sin(ellapsedTime / 500)) * 0.05
-      const bodyFade = planeLerp ** 2
+      const bodyFade = Store.lerp.plane.current ** 2
       const maxSize = Math.max(width, height)
       this.body.color = `rgba(255, 255, 255, ${opacity * (1 - bodyFade)})`
       this.body.stroke = density * 4 + ((maxSize / 4) * bodyFade)

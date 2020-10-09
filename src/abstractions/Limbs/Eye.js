@@ -9,7 +9,7 @@ export default class Eye extends Limb {
     this.refs.globe = new Shape({
       addTo: this.anchor,
       stroke: props.radius,
-      color: 'black'
+      color: '#000000'
     })
 
     this.refs.pupil = new Shape({

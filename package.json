@@ -79,6 +79,7 @@
   "dependencies": {
     "@internet/raf": "^0.2.1",
     "fast-random": "^2.0.4",
+    "hex-rgb": "^4.2.0",
     "missing-math": "^3.2.0",
     "three": "^0.121.1",
     "tiny-throttle": "^1.0.1",
