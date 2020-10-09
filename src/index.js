@@ -51,10 +51,5 @@ Raf.add(() => {
   Animation.update()
   Scene.render()
 
-  if (!Store.postprocessing.enabled.get()) return
-
-  /* eslint-disable dot-notation */
-  PostProcessing.SHADERS.sobel.uniforms['resolution'].value.x = Math.sin(Date.now() / 1000) * 200
-  PostProcessing.SHADERS.sobel.uniforms['resolution'].value.y = Math.sin(Date.now() / 1000) * 200
-  PostProcessing.render()
+  if (Store.postprocessing.enabled.get()) PostProcessing.render()
 })

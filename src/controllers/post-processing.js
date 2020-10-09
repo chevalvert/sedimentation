@@ -78,6 +78,9 @@ export default {
   },
 
   render: function () {
+    /* eslint-disable dot-notation */
+    SHADERS.sobel.uniforms['resolution'].value.x = Store.postprocessing.sobelResolutionX.current
+
     material.map.needsUpdate = true
     renderer.render(scene, camera)
     composer.render()

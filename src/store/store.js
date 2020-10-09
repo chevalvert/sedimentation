@@ -61,7 +61,8 @@ const Store = {
   },
 
   postprocessing: {
-    enabled: writable(false)
+    enabled: writable(false),
+    sobelResolutionX: writable(0)
   },
 
   midi: {
@@ -79,6 +80,9 @@ const Store = {
 }
 
 Store.demo = derived(Store.midi.ready, v => !v)
+Store.lerp.mixed = derived([Store.lerp.plane, Store.lerp.build], () => {
+  return (1 - Store.lerp.plane.current) * Store.lerp.build.current
+})
 
 window.Store = Store
 export default Store
