@@ -1,6 +1,7 @@
 import Store from 'store/store'
 import { debounce } from 'tiny-throttle'
 
+import Midi from 'controllers/midi'
 import Animation from 'controllers/animation'
 import Raf from 'controllers/raf'
 import Scene from 'controllers/scene'
@@ -15,9 +16,22 @@ window.onload = () => {
   Store.raf.isRunning.set(true)
 }
 
+Midi.derive(Store.seed, { cc: 18, update: v => Date.now() })
+Midi.derive(Store.creature.scaleX, { cc: 16 })
+Midi.derive(Store.creature.scaleY, { cc: 17 })
+Midi.derive(Store.creature.density, { cc: 0, update: v => 10 + v * 190 })
+Midi.derive(Store.creature.planeLerp, { cc: 1 })
+Midi.derive(Store.creature.buildLerp, { cc: 2 })
+
 Raf.add(() => {
   if (!window.ENV.production) {
     document.title = `${window.ENV.pageTitle} | [${Store.raf.fps.current.toFixed(0)} fps]`
+  }
+
+  if (!Store.midi.ready.get()) {
+    const t = Math.sin(Date.now() / 1000) + 1
+    Store.creature.planeLerp.set(Math.min(t, 1))
+    Store.creature.buildLerp.set(Math.max(1, t) - 1)
   }
 
   Animation.update()

@@ -1,10 +1,13 @@
 import Store from 'store/store'
-import { Anchor } from 'zdog'
+import { Anchor, Dragger, Shape } from 'zdog'
 
 const anchor = new Anchor()
 const canvas = document.querySelector('canvas#Scene')
 const ctx = canvas.getContext('2d')
 
+const add = (ZdogClass, props) => new ZdogClass({ addTo: anchor, ...props })
+
+// Update Scene canvas when Store dimensions change
 Store.scene.dimensions.subscribe(([width, height]) => {
   canvas.width = window.innerWidth
   canvas.height = window.innerHeight
@@ -12,12 +15,33 @@ Store.scene.dimensions.subscribe(([width, height]) => {
   canvas.style.height = canvas.height + 'px'
 })
 
+// Enable drag-to-rotate
+let dragStartRX
+let dragStartRY
+add(Dragger, {
+  startElement: canvas,
+  onDragStart: function () {
+    dragStartRX = anchor.rotate.x
+    dragStartRY = anchor.rotate.y
+  },
+
+  onDragMove: function (pointer, moveX, moveY) {
+    const minSize = Math.min(canvas.width, canvas.height)
+    Store.scene.rotation.update(rotation => ({
+      ...rotation,
+      x: dragStartRX - (moveY / minSize * Math.PI * 2),
+      y: dragStartRY - (moveX / minSize * Math.PI * 2)
+    }), true)
+  }
+})
+
+
 export default {
   get anchor () { return anchor },
   get canvas () { return canvas },
   get ctx () { return ctx },
 
-  add: (ZdogClass, props) => new ZdogClass({ addTo: anchor, ...props }),
+  add,
   render: function () {
     const zoom = Store.scene.zoom.get()
     const rotation = Store.scene.rotation.get()

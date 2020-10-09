@@ -6,3 +6,7 @@ $white: #FFFFFF;
 
 @import 'sass/base';
 @include html-no-scroll;
+
+canvas {
+  background: #0a00a1;
+}

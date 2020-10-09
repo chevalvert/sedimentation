@@ -1,46 +1,35 @@
 import Store from 'store/store'
-import { Ellipse, Shape } from 'zdog'
+
+import Creature from 'abstractions/Creature'
 import Scene from 'controllers/scene'
 
-// Add anonymously
-Scene.add(Ellipse, {
-  diameter: 80,
-  stroke: 5,
-  translate: { z: -30 },
-  color: 'white'
-})
+import lerpPoint from 'utils/point-lerp'
 
-// Add and store the Zdog shape for future reference
-const ellipse = Scene.add(Ellipse, {
-  diameter: 80,
-  translate: { z: -20 },
-  color: 'black'
-})
+let creature
 
-const triangle = Scene.add(Shape, {
-  path: [
-    { x: 0, y: -32 },
-    { x: 32, y: 32 },
-    { x: -32, y: 32 }
-  ],
-  translate: { z: 20 },
-  color: 'red',
-  stroke: 12,
-  fill: true
-})
+Store.seed.subscribe(spawn)
+spawn()
+
+function spawn () {
+  if (creature) creature.destroy()
+  creature = new Creature(Scene.anchor)
+}
 
 function update () {
-  // Get raf values via the Store
   const ellapsedTime = Store.raf.ellapsedTime.get()
-  const t = (Math.sin(ellapsedTime / 1000) + 1) / 2
+  const frameCount = Store.raf.frameCount.get()
 
-  // Transform Scene shapes
-  ellipse.stroke = 10 + (t * 10)
-  triangle.scale.x = 1 + (t * 2)
+  creature.update({ ellapsedTime, frameCount })
 
-  // Transform Scene attributes via the Store
-  Store.scene.zoom.set(1 + (t * 3))
-  Store.scene.rotation.update(rotation => ({ ...rotation, x: t * Math.PI }))
+  Store.scene.rotation.update(rotation => {
+    // const t = Store.creature.planeLerp.get()
+    // return lerpPoint(rotation, { x: 0, y: 0, z: 0 }, t)
+    return {
+      ...rotation,
+      x: Store.creature.buildLerp.get(),
+      z: Store.creature.buildLerp.get()
+    }
+  })
 }
 
 export default { update }
