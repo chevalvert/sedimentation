@@ -5,6 +5,7 @@ const paths = require('./paths.config')
 const commonConfig = require('./webpack.config.common')
 
 const devConfig = {
+  mode: 'development',
   entry: [
     path.join(paths.pages, 'pages.js'),
     'webpack-hot-middleware/client?reload=true'

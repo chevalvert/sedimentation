@@ -6,6 +6,7 @@ import Midi from 'controllers/midi'
 import PostProcessing from 'controllers/post-processing'
 import Raf from 'controllers/raf'
 import Scene from 'controllers/scene'
+import Sound from 'controllers/sound'
 import Tweakpane from 'controllers/tweakpane'
 
 window.onresize = debounce(() => {
@@ -25,6 +26,7 @@ Midi.register(Store.creature.density, { cc: 0, update: v => 10 + v * 190 })
 Midi.register(Store.creature.planeLerp, { cc: 1 })
 Midi.register(Store.creature.buildLerp, { cc: 2 })
 
+Tweakpane.register(Store.sound.isPlaying, 'son')
 Tweakpane.register(Store.demo, 'démo')
 Tweakpane.register(Store.postprocessing.enabled, 'post-process')
 Tweakpane.register(Store.creature.scaleX, 'échelle x', { min: 0, max: 1 })

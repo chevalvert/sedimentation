@@ -57,13 +57,19 @@ const Store = {
   },
 
   postprocessing: {
-    enabled: writable(true)
+    enabled: writable(false)
   },
 
   midi: {
     debug: writable(false),
     ready: writable(false),
     input: readable('nanoKONTROL2 SLIDER/KNOB')
+  },
+
+  sound: {
+    enabled: writable(true),
+    url: readable('scuba.mp3'),
+    isPlaying: writable(false),
   },
 
   tweakpane: {
