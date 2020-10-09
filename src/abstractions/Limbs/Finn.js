@@ -28,7 +28,7 @@ export default class Finn extends Limb {
   }
 
   update ({ ellapsedTime, frameCount }) {
-    const amp = 1 - Store.creature.planeLerp.get()
+    const amp = 1 - Store.lerp.plane.get()
     this.anchor.rotate.z = Math.sin((this.props.dir || 1) * ellapsedTime / 500) * amp
   }
 }

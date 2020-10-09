@@ -37,8 +37,8 @@ export default class Tentacle extends Limb {
   }
 
   update ({ ellapsedTime, frameCount }) {
-    const amp = 1 - Store.creature.planeLerp.get()
-    const wallFactor = Store.creature.buildLerp.get()
+    const amp = 1 - Store.lerp.plane.get()
+    const wallFactor = Store.lerp.build.get()
 
     this.refs.tentacle.path[1].bezier[0].y = this.props.length / 2 * Math.sin(this.state.speed * ellapsedTime / 100) * amp
     this.refs.tentacle.path[1].bezier[0].z = this.props.length / 2 * Math.cos(this.state.speed * ellapsedTime / 100) * amp

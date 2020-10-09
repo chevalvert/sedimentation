@@ -4,6 +4,10 @@ const Store = {
   seed: writable(Date.now()),
 
   demo: undefined, // See below for derivation
+  lerp: {
+    plane: writable(0),
+    build: writable(0)
+  },
 
   creature: {
     debug: writable(false),

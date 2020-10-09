@@ -23,8 +23,8 @@ Midi.register(Store.seed, { cc: 18, update: v => Date.now() })
 Midi.register(Store.creature.scaleX, { cc: 16 })
 Midi.register(Store.creature.scaleY, { cc: 17 })
 Midi.register(Store.creature.density, { cc: 0, update: v => 10 + v * 190 })
-Midi.register(Store.creature.planeLerp, { cc: 1 })
-Midi.register(Store.creature.buildLerp, { cc: 2 })
+Midi.register(Store.lerp.plane, { cc: 1 })
+Midi.register(Store.lerp.build, { cc: 2 })
 
 Tweakpane.register(Store.sound.isPlaying, 'son')
 Tweakpane.register(Store.demo, 'démo')
@@ -32,8 +32,8 @@ Tweakpane.register(Store.postprocessing.enabled, 'post-process')
 Tweakpane.register(Store.creature.scaleX, 'échelle x', { min: 0, max: 1 })
 Tweakpane.register(Store.creature.scaleY, 'échelle y', { min: 0, max: 1 })
 Tweakpane.register(Store.creature.density, 'densité', { min: 10, max: 200, step: 1 })
-Tweakpane.register(Store.creature.planeLerp, 'sédimentation', { min: 0, max: 1 })
-Tweakpane.register(Store.creature.buildLerp, 'construction', { min: 0, max: 1 })
+Tweakpane.register(Store.lerp.plane, 'sédimentation', { min: 0, max: 1 })
+Tweakpane.register(Store.lerp.build, 'construction', { min: 0, max: 1 })
 
 PostProcessing.register(Scene.canvas)
 
@@ -44,8 +44,8 @@ Raf.add(() => {
 
   if (Store.demo.get()) {
     const t = Math.sin(Date.now() / 1000) + 1
-    Store.creature.planeLerp.set(Math.min(t, 1))
-    Store.creature.buildLerp.set(Math.max(1, t) - 1)
+    Store.lerp.plane.set(Math.min(t, 1))
+    Store.lerp.build.set(Math.max(1, t) - 1)
   }
 
   Animation.update()

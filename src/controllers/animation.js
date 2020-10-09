@@ -22,12 +22,12 @@ function update () {
   creature.update({ ellapsedTime, frameCount })
 
   Store.scene.rotation.update(rotation => {
-    // const t = Store.creature.planeLerp.get()
+    // const t = Store.lerp.plane.get()
     // return lerpPoint(rotation, { x: 0, y: 0, z: 0 }, t)
     return {
       ...rotation,
-      x: Store.creature.buildLerp.get(),
-      z: Store.creature.buildLerp.get()
+      x: Store.lerp.build.get(),
+      z: Store.lerp.build.get()
     }
   })
 }

@@ -116,7 +116,7 @@ export default class Creature {
   update ({ ellapsedTime, frameCount }) {
     const [width, height] = Store.scene.dimensions.get()
     const density = Store.creature.density.get()
-    const planeLerp = Store.creature.planeLerp.get()
+    const planeLerp = Store.lerp.plane.get()
     this.anchor.scale = {
       x: density * Store.creature.scaleX.get(),
       y: density * Store.creature.scaleY.get(),
@@ -129,7 +129,7 @@ export default class Creature {
       anchor.translate = lerpPoint(anchor.positions.CUBE, anchor.positions.PLANE, planeLerp)
       const opacity = planeLerp ** 4
       anchor.dot.color = `rgba(255, 255, 255, ${opacity})`
-      anchor.dot.scale = Store.creature.buildLerp.get()
+      anchor.dot.scale = Store.lerp.build.get()
     })
 
     { // Body

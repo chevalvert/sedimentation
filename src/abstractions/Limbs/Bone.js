@@ -27,7 +27,7 @@ export default class Bone extends Limb {
   }
 
   update ({ ellapsedTime, frameCount }) {
-    const wallFactor = Store.creature.buildLerp.get()
+    const wallFactor = Store.lerp.build.get()
     this.refs.bone.scale = 1 + 1 * wallFactor ** 3
     this.refs.bone.rotate = lerpPoint(this.state.initialRotation, { x: 0, y: Math.PI / 2, z: 0 }, wallFactor)
     this.refs.bone.updatePath()
