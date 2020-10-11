@@ -15,7 +15,7 @@ export default class Finn extends Limb {
         { x: 0, z: props.size / 2 }
       ],
       closed: true,
-      fill: true,
+      fill: false,
       rotate: {
         x: Prng.random(),
         y: Prng.random()

@@ -7,16 +7,27 @@ $white: #FFFFFF;
 @import 'sass/base';
 @include html-no-scroll;
 
+body{
+    background: #0a00a1;
+}
+
 canvas {
+  background: #0a00a1;
+  background-image: url('installation-monument-poudre-1_1.png');
+  background-size: cover;
   position: absolute;
 }
 
 canvas#Scene {
-  background: #0a00a1;
+  z-index:3;
+  mix-blend-mode: hard-light;
+
+
 }
 
 canvas#PostProcessing {
   pointer-events: none;
+  z-index:2;
   opacity: 1;
 }
 
@@ -24,6 +35,7 @@ canvas#PostProcessing {
 .tp {
   &-dfwv {
     @include easing(300ms, opacity);
+    z-index:10;
   }
 
   body:not(:hover) &-dfwv {

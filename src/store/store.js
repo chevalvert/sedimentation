@@ -62,7 +62,9 @@ const Store = {
 
   postprocessing: {
     enabled: writable(false),
-    sobelResolutionX: writable(0)
+    // sobelResolutionX: writable(0)
+    edgeWorkRadius: writable(15),
+    blurStrength: writable(0)
   },
 
   midi: {
@@ -79,7 +81,9 @@ const Store = {
   tweakpane: {}
 }
 
-Store.demo = derived(Store.midi.ready, v => !v)
+//Store.demo = derived(Store.midi.ready, v => !v)
+Store.demo = writable(false)
+
 Store.lerp.mixed = derived([Store.lerp.plane, Store.lerp.build], () => {
   return (1 - Store.lerp.plane.current) * Store.lerp.build.current
 })

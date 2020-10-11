@@ -20,11 +20,11 @@ export default class Creature {
     this.anchors = this.createAnchors()
     this.colors = shuffle([...Store.creature.colors.current], Prng.random)
       .splice(0, Store.creature.colorsLength.get())
-    this.body = new Shape({
-      addTo: this.anchor,
-      color: 'rgba(255, 255, 255, 0.1)',
-      stroke: 100
-    })
+    // this.body = new Shape({
+    //   addTo: this.anchor,
+    //   color: 'rgba(255, 255, 255, 0.1)',
+    //   stroke: 100
+    // })
     this.limbs = this.render()
   }
 
@@ -139,16 +139,16 @@ export default class Creature {
         anchor.dot.fill = true
         anchor.dot.stroke = map(Store.lerp.build.current, 0, 1, 1, 0.25)
       }
-      anchor.dot.scale = Store.lerp.build.get()
+      //anchor.dot.scale = Store.lerp.build.get()
     })
 
-    { // Body
-      const opacity = 0.2 + (1 + Math.sin(ellapsedTime / 500)) * 0.05
-      const bodyFade = Store.lerp.plane.current ** 2
-      const maxSize = Math.max(width, height)
-      this.body.color = `rgba(255, 255, 255, ${opacity * (1 - bodyFade)})`
-      this.body.stroke = density * 4 + ((maxSize / 4) * bodyFade)
-    }
+    // { // Body
+    //   const opacity = 0.2 + (1 + Math.sin(ellapsedTime / 500)) * 0.05
+    //   const bodyFade = Store.lerp.plane.current ** 2
+    //   const maxSize = Math.max(width, height)
+    //   this.body.color = `rgba(255, 255, 255, ${opacity * (1 - bodyFade)})`
+    //   this.body.stroke = density * 4 + ((maxSize / 4) * bodyFade)
+    // }
 
     this.limbs.forEach(limb => {
       limb.anchor.scale = !limb.flipped
@@ -165,12 +165,12 @@ export default class Creature {
 
   destroy () {
     this.limbs.forEach(limb => limb.destroy())
-    this.body.remove()
+    // this.body.remove()
     this.anchors.forEach(anchor => anchor.remove())
     this.anchor.remove()
     delete this.anchor
     delete this.anchors
-    delete this.body
+    // delete this.body
     delete this.limbs
   }
 }

@@ -24,7 +24,7 @@ Store.sound.isPlaying.subscribe(async isPlaying => {
   }
 })
 
-document.addEventListener('click', () => Store.sound.isPlaying.set(true), { once: true })
+//document.addEventListener('click', () => Store.sound.isPlaying.set(true), { once: true })
 
 export default {
   // TODO

@@ -9,12 +9,12 @@ export default class Eye extends Limb {
     this.refs.globe = new Shape({
       addTo: this.anchor,
       stroke: props.radius,
-      color: '#000000'
+      color: '#fff'
     })
 
     this.refs.pupil = new Shape({
       addTo: this.refs.globe,
-      color: 'white',
+      color: '#000',
       stroke: props.radius * 0.3,
       translate: { z: props.radius / 2 },
       rotate: { z: Prng.random() }
