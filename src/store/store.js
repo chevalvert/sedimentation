@@ -61,9 +61,9 @@ const Store = {
   },
 
   postprocessing: {
-    enabled: writable(false),
+    enabled: writable(true),
     // sobelResolutionX: writable(0)
-    edgeWorkRadius: writable(15),
+    edgeWorkRadius: writable(300),
     blurStrength: writable(0)
   },
 
@@ -74,8 +74,8 @@ const Store = {
   },
 
   sound: {
-    url: readable('scuba.mp3'),
-    isPlaying: writable(false)
+    url: readable('sedimentation.mp3'),
+    isPlaying: writable(true)
   },
 
   tweakpane: {}
