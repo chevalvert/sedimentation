@@ -71,7 +71,9 @@ const Store = {
   midi: {
     debug: writable(false),
     ready: writable(false),
-    input: readable('nanoKONTROL2')
+    // input value will be loosely matched against any input name
+    // (case insensitve, partial match)
+    input: writable('nanokontrol2')
   },
 
   sound: {

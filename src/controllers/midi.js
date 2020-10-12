@@ -8,7 +8,9 @@ const derivations = []
 function setup () {
   if (Store.midi.ready.get()) return
 
-  const input = WebMidi.getInputByName(Store.midi.input.get())
+  const input = WebMidi.inputs.find(input => {
+    return input.name.toUpperCase().includes(Store.midi.input.current.toUpperCase())
+  })
   if (!input) return
 
   Store.midi.ready.set(true)
