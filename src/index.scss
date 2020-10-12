@@ -21,24 +21,20 @@ main{
 
 canvas {
   /*background-image: url('installation-monument-poudre-1_1.png');*/
-  background: #0a00a1;
   position: absolute;
-  z-index:2;
-  mix-blend-mode: darken;
 
 }
 
 canvas#Scene {
   z-index:3;
+  background:#0a00a1;
   mix-blend-mode: hard-light;
-
-
 }
 
 canvas#PostProcessing {
   pointer-events: none;
   z-index:2;
-  opacity: 1;
+  //mix-blend-mode: darken;
 }
 
 // Tweakpane hacking

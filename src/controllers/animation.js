@@ -24,7 +24,8 @@ function update () {
     return {
       ...rotation,
       x: Store.lerp.build.get(),
-      z: Store.lerp.build.get()
+      y: ellapsedTime / 5000,
+      z: Store.lerp.build.get() 
     }
   })
 }

@@ -48,7 +48,7 @@ Store.scene.dimensions.subscribe(([width, height]) => {
   planeMesh.scale.set(width, height, 1)
 })
 
-renderer.setPixelRatio(window.devicePixelRatio)
+renderer.setPixelRatio(Store.postprocessing.quality.get())
 renderer.setSize(window.innerWidth, window.innerHeight)
 
 renderer.domElement.id = 'PostProcessing'
@@ -59,7 +59,7 @@ const halftonePass = new HalftonePass( window.innerWidth, window.innerHeight, {d
 
 composer.addPass(new RenderPass(scene, camera))
 
-composer.addPass( halftonePass );
+//composer.addPass( halftonePass );
 
 
 SHADERS.dotScreen.uniforms['tSize'].value.x = window.innerWidth
@@ -77,13 +77,12 @@ SHADERS.zoomBlur.uniforms['strength'].value = 0.0
 
 
 
-composer.addPass(SHADERS.zoomBlur)
 
 composer.addPass(SHADERS.edgeWorkA)
 
 composer.addPass(SHADERS.zoomBlur)
 
-composer.addPass(SHADERS.edgeWorkB)
+ composer.addPass(SHADERS.edgeWorkB)
 
 
 

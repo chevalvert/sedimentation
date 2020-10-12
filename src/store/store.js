@@ -61,6 +61,7 @@ const Store = {
   },
 
   postprocessing: {
+    quality: readable(0.3),
     enabled: writable(true),
     // sobelResolutionX: writable(0)
     edgeWorkRadius: writable(300),
