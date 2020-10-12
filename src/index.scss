@@ -34,7 +34,7 @@ canvas#Scene {
 canvas#PostProcessing {
   pointer-events: none;
   z-index:2;
-  //mix-blend-mode: darken;
+  mix-blend-mode: darken;
 }
 
 // Tweakpane hacking

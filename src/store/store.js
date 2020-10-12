@@ -61,7 +61,7 @@ const Store = {
   },
 
   postprocessing: {
-    quality: readable(0.3),
+    quality: readable(0.4),
     enabled: writable(true),
     // sobelResolutionX: writable(0)
     edgeWorkRadius: writable(300),
@@ -71,7 +71,7 @@ const Store = {
   midi: {
     debug: writable(false),
     ready: writable(false),
-    input: readable('nanoKONTROL2 SLIDER/KNOB')
+    input: readable('nanoKONTROL2')
   },
 
   sound: {
