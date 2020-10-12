@@ -57,6 +57,9 @@ const Store = {
     debug: writable(true),
     zoom: writable(4),
     rotation: writable({ x: 0, y: 0, z: 0 }),
+    rotationSpeedX: writable(0),
+    rotationSpeedY: writable(0),
+    rotationSpeedZ: writable(0),
     dimensions: writable([0, 0])
   },
 

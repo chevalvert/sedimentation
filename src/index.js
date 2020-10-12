@@ -37,11 +37,9 @@ Tweakpane.register(Store.creature.scaleX, 'échelle x', { min: 0, max: 1 })
 Tweakpane.register(Store.creature.scaleY, 'échelle y', { min: 0, max: 1 })
 Tweakpane.register(Store.creature.density, 'densité', { min: 10, max: 200, step: 1 })
 Tweakpane.register(Store.lerp.plane, 'sédimentation', { min: 0, max: 0.9 })
-Tweakpane.register(Store.lerp.build, 'construction', { min: 0, max: 1 })
-
-
-
-
+Tweakpane.register(Store.scene.rotationSpeedX, 'rotation X', { min: 0, max: 1 })
+Tweakpane.register(Store.scene.rotationSpeedY, 'rotation Y', { min: 0, max: 1 })
+Tweakpane.register(Store.scene.rotationSpeedZ, 'rotation Z', { min: 0, max: 1 })
 
 PostProcessing.register(Scene.canvas)
 

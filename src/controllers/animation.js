@@ -21,11 +21,11 @@ function update () {
   creature.update({ ellapsedTime, frameCount })
 
   Store.scene.rotation.update(rotation => {
+    const t = ellapsedTime / 1000
     return {
-      ...rotation,
-      x: Store.lerp.build.get(),
-      y: ellapsedTime / 5000,
-      z: Store.lerp.build.get() 
+      x: Store.lerp.build.get() + t * Store.scene.rotationSpeedX.get(),
+      y: t * Store.scene.rotationSpeedY.get(),
+      z: Store.lerp.build.get() + t * Store.scene.rotationSpeedZ.get()
     }
   })
 }
