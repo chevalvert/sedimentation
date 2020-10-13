@@ -141,15 +141,7 @@ export default class Creature {
       }
       //anchor.dot.scale = Store.lerp.build.get()
     })
-
-    // { // Body
-    //   const opacity = 0.2 + (1 + Math.sin(ellapsedTime / 500)) * 0.05
-    //   const bodyFade = Store.lerp.plane.current ** 2
-    //   const maxSize = Math.max(width, height)
-    //   this.body.color = `rgba(255, 255, 255, ${opacity * (1 - bodyFade)})`
-    //   this.body.stroke = density * 4 + ((maxSize / 4) * bodyFade)
-    // }
-
+    
     this.limbs.forEach(limb => {
       limb.anchor.scale = !limb.flipped
         ? 1 / density
