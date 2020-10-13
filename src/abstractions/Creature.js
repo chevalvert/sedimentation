@@ -20,11 +20,6 @@ export default class Creature {
     this.anchors = this.createAnchors()
     this.colors = shuffle([...Store.creature.colors.current], Prng.random)
       .splice(0, Store.creature.colorsLength.get())
-    // this.body = new Shape({
-    //   addTo: this.anchor,
-    //   color: 'rgba(255, 255, 255, 0.1)',
-    //   stroke: 100
-    // })
     this.limbs = this.render()
   }
 
@@ -127,7 +122,7 @@ export default class Creature {
       z: density
     }
 
-    this.anchor.translate.y = (1 - Store.lerp.plane.current) * Math.sin(ellapsedTime * Store.creature.oscillationFreq.get()) * Store.creature.oscillationAmp.get()
+    this.anchor.translate.y = (1.2 - Store.lerp.plane.current) * Math.sin(ellapsedTime * Store.creature.oscillationFreq.get()) * Store.creature.oscillationAmp.get()
 
     this.anchors.forEach(anchor => {
       anchor.translate = lerpPoint(anchor.positions.CUBE, anchor.positions.PLANE, Store.lerp.plane.current)
