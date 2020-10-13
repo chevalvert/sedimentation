@@ -5,6 +5,8 @@ const anchor = new Anchor()
 const canvas = document.querySelector('canvas#Scene')
 const ctx = canvas.getContext('2d')
 
+const main = document.querySelector('main')
+
 const add = (ZdogClass, props) => new ZdogClass({ addTo: anchor, ...props })
 
 // Update Scene canvas when Store dimensions change
@@ -39,6 +41,7 @@ export default {
   get anchor () { return anchor },
   get canvas () { return canvas },
   get ctx () { return ctx },
+  get main () { return main },
 
   add,
   render: function () {

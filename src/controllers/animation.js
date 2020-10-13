@@ -32,6 +32,12 @@ function update () {
     Scene.canvas.style.backgroundColor = 'hsl('+ Store.scene.bgColor.get() +',100%,30%)'; 
   })
 
+  Store.scene.bgImage.update(bgImage => {
+    Scene.main.style.backgroundImage = "url('texture-"+Store.scene.bgImage.get()+".png')"; 
+  })
+
+  //Store.scene.bgImage.get()
+  
 }
 
 export default { update }

@@ -61,7 +61,8 @@ const Store = {
     rotationSpeedY: writable(0),
     rotationSpeedZ: writable(0),
     dimensions: writable([0, 0]),
-    bgColor: writable(255)
+    bgColor: writable(255),
+    bgImage: writable(0)
   },
 
   postprocessing: {
