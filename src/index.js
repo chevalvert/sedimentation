@@ -27,6 +27,11 @@ Midi.register(Store.postprocessing.blurStrength, { cc: 20, update: v => 0 + v * 
 Midi.register(Store.creature.density, { cc: 0, update: v => 10 + v * 190 })
 Midi.register(Store.lerp.plane, { cc: 1 })
 Midi.register(Store.lerp.build, { cc: 2 })
+Midi.register(Store.scene.rotationSpeedX, { cc: 21 })
+Midi.register(Store.scene.rotationSpeedY, { cc: 22 })
+Midi.register(Store.scene.rotationSpeedZ, { cc: 23 })
+
+
 
 Tweakpane.register(Store.sound.isPlaying, 'son')
 Tweakpane.register(Store.demo, 'démo')
@@ -36,7 +41,8 @@ Tweakpane.register(Store.postprocessing.blurStrength, 'blur Strength', { min: 0,
 Tweakpane.register(Store.creature.scaleX, 'échelle x', { min: 0, max: 1 })
 Tweakpane.register(Store.creature.scaleY, 'échelle y', { min: 0, max: 1 })
 Tweakpane.register(Store.creature.density, 'densité', { min: 10, max: 200, step: 1 })
-Tweakpane.register(Store.lerp.plane, 'sédimentation', { min: 0, max: 0.9 })
+Tweakpane.register(Store.lerp.plane, 'sédimentation', { min: 0, max: 1 })
+Tweakpane.register(Store.lerp.build, 'construction', { min: 0, max: 1 })
 Tweakpane.register(Store.scene.rotationSpeedX, 'rotation X', { min: 0, max: 1 })
 Tweakpane.register(Store.scene.rotationSpeedY, 'rotation Y', { min: 0, max: 1 })
 Tweakpane.register(Store.scene.rotationSpeedZ, 'rotation Z', { min: 0, max: 1 })
