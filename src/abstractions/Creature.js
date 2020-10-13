@@ -81,6 +81,7 @@ export default class Creature {
       const anchor = Prng.randomOf(this.anchors.filter(a => a.positions.CUBE.z > 1))
       const size = Prng.randomInt(3, 30)
       const props = {
+        appearence: Prng.randomInt(0,3),
         radius: size,
         radiusPupil: size / Prng.randomInt(2, 8)
       }
