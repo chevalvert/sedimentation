@@ -22,7 +22,7 @@ export default class Eye extends Limb {
   }
 
   update ({ ellapsedTime, frameCount }) {
-    this.anchor.rotate.x = Math.sin(this.timeScale * ellapsedTime / 500)
+    this.anchor.rotate.x = Math.sin(this.timeScale * ellapsedTime / 400)
     this.anchor.rotate.y = Math.sin(this.timeScale * ellapsedTime / 500)
   }
 }
