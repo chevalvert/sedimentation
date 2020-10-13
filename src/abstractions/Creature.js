@@ -79,8 +79,10 @@ export default class Creature {
     // Eyes
     for (let index = 0; index < (Prng.random() ** 2) * 3; index++) {
       const anchor = Prng.randomOf(this.anchors.filter(a => a.positions.CUBE.z > 1))
+      const size = Prng.randomInt(3, 30)
       const props = {
-        radius: Prng.randomInt(3, 30)
+        radius: size,
+        radiusPupil: size / Prng.randomInt(2, 8)
       }
       limbs.push(new Eye(anchor, props))
       limbs.push(new Eye(anchor.cubeMirror, props))
@@ -141,7 +143,7 @@ export default class Creature {
       }
       //anchor.dot.scale = Store.lerp.build.get()
     })
-    
+
     this.limbs.forEach(limb => {
       limb.anchor.scale = !limb.flipped
         ? 1 / density

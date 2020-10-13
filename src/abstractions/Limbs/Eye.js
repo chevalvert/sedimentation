@@ -15,14 +15,14 @@ export default class Eye extends Limb {
     this.refs.pupil = new Shape({
       addTo: this.refs.globe,
       color: '#000',
-      stroke: props.radius * 0.3,
+      stroke: props.radiusPupil,
       translate: { z: props.radius / 2 },
       rotate: { z: Prng.random() }
     })
   }
 
   update ({ ellapsedTime, frameCount }) {
-    this.anchor.rotate.x = Math.sin(this.timeScale * ellapsedTime / 400)
-    this.anchor.rotate.y = Math.sin(this.timeScale * ellapsedTime / 500)
+    this.anchor.rotate.x = Math.sin(this.timeScale * ellapsedTime / 500)
+    this.anchor.rotate.y = Math.sin(this.timeScale * ellapsedTime / 600)
   }
 }
