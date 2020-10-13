@@ -1,5 +1,4 @@
 import Store from 'store/store'
-
 import Creature from 'abstractions/Creature'
 import Scene from 'controllers/scene'
 
@@ -28,6 +27,11 @@ function update () {
       z: Store.lerp.build.get() + t * Store.scene.rotationSpeedZ.get()
     }
   })
+
+  Store.scene.bgColor.update(bgColor => {
+    Scene.canvas.style.backgroundColor = 'hsl('+ Store.scene.bgColor.get() +',100%,30%)'; 
+  })
+
 }
 
 export default { update }

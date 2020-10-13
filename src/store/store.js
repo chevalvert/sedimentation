@@ -60,7 +60,8 @@ const Store = {
     rotationSpeedX: writable(0),
     rotationSpeedY: writable(0),
     rotationSpeedZ: writable(0),
-    dimensions: writable([0, 0])
+    dimensions: writable([0, 0]),
+    bgColor: writable(255)
   },
 
   postprocessing: {
