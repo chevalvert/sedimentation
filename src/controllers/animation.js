@@ -33,7 +33,7 @@ function update () {
   })
 
   Store.scene.bgImage.update(bgImage => {
-    Scene.main.style.backgroundImage = "url('texture-"+Store.scene.bgImage.get()+".png')"; 
+    Scene.main.style.backgroundImage = "url('texture-"+Store.scene.bgImage.get()+".jpg')"; 
   })
 
   //Store.scene.bgImage.get()
