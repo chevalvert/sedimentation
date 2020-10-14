@@ -11,13 +11,7 @@ body{
 }
 
 main{
-  background-image: url('mur.png');
-  background-image: url('texture-2.png');
-  background-image: url('texture-5.png');
-  background-image: url('texture-7.png');
-  background-image: url('texture-6.png');
-  background-image: url('texture-4.png');
-  background-image: url('texture-3.png');
+  background-image: url('texture-0.jpg');
   background-size: cover;
   z-index:1;
   position: absolute;
@@ -26,14 +20,13 @@ main{
 }
 
 canvas {
-  /*background-image: url('installation-monument-poudre-1_1.png');*/
   position: absolute;
 
 }
 
 canvas#Scene {
   z-index:3;
-  /*background:#0a00a1;*/
+  background:#0a00a1;
   mix-blend-mode: hard-light;
 }
 

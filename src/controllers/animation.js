@@ -13,6 +13,18 @@ function spawn () {
   console.log(creature)
 }
 
+Store.scene.bgColor.subscribe(bgColor => {
+  window.requestAnimationFrame(() => {
+    Scene.canvas.style.backgroundColor = 'hsl('+ Store.scene.bgColor.get() +',100%,30%)'
+  })
+})
+
+Store.scene.bgImage.subscribe(bgImage => {
+  window.requestAnimationFrame(() => {
+    Scene.main.style.backgroundImage = "url('texture-"+Store.scene.bgImage.get()+".jpg')"
+  })
+})
+
 function update () {
   const ellapsedTime = Store.raf.ellapsedTime.get()
   const frameCount = Store.raf.frameCount.get()
@@ -27,17 +39,6 @@ function update () {
       z: Store.lerp.build.get() + t * Store.scene.rotationSpeedZ.get()
     }
   })
-
-  Store.scene.bgColor.update(bgColor => {
-    Scene.canvas.style.backgroundColor = 'hsl('+ Store.scene.bgColor.get() +',100%,30%)'; 
-  })
-
-  Store.scene.bgImage.update(bgImage => {
-    Scene.main.style.backgroundImage = "url('texture-"+Store.scene.bgImage.get()+".jpg')"; 
-  })
-
-  //Store.scene.bgImage.get()
-  
 }
 
 export default { update }
