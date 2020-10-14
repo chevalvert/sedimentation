@@ -2,6 +2,7 @@ import Store from 'store/store'
 import { debounce } from 'tiny-throttle'
 
 import Animation from 'controllers/animation'
+import Lerper from 'controllers/lerper'
 import Midi from 'controllers/midi'
 import PostProcessing from 'controllers/post-processing'
 import Raf from 'controllers/raf'
@@ -20,6 +21,10 @@ window.onload = () => {
   Store.raf.isRunning.set(true)
 }
 
+Lerper.register(Store.scene.zoom, 0.05)
+Lerper.register(Store.creature.density, 0.09)
+
+
 //Midi.register(Store.seed, { cc: 18, update: v => Date.now() })
 Midi.register(Store.seed, { cc: 45, update: v => v > 0 ? Date.now() : Store.seed.get() })
 Midi.register(Store.creature.scaleX, { cc: 16 })
@@ -36,8 +41,6 @@ Midi.register(Store.scene.bgImage, { cc: 42, update: v => Prng.randomInt(0, 27) 
 Midi.register(Store.scene.rotationSpeedX, { cc: 21 })
 Midi.register(Store.scene.rotationSpeedY, { cc: 22 })
 Midi.register(Store.scene.rotationSpeedZ, { cc: 23 })
-
-
 
 Tweakpane.register(Store.sound.isPlaying, 'son')
 Tweakpane.register(Store.demo, 'démo')
@@ -60,6 +63,8 @@ Tweakpane.register(Store.scene.rotationSpeedZ, 'rotation Z', { min: 0, max: 1 })
 PostProcessing.register(Scene.canvas)
 
 Raf.add(() => {
+  Lerper.update()
+
   if (!window.ENV.production) {
     document.title = `${window.ENV.pageTitle} | [${Store.raf.fps.current.toFixed(0)} fps]`
   }
